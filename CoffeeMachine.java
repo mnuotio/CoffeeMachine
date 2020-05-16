@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class CoffeeMachine {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         CoffeeMaker machine = new CoffeeMaker(400, 540, 120, 9, 550);
 
         while (true) {
@@ -14,7 +13,6 @@ public class CoffeeMachine {
                 break;
             }
             machine.use(userInput);
-
         }
     }
 }
@@ -27,7 +25,6 @@ class CoffeeMaker {
     private int money;
     private State state;
 
-    // Constructor
     public CoffeeMaker(int water, int milk, int beans, int cups, int money) {
         this.water = water;
         this.milk = milk;
@@ -36,7 +33,6 @@ class CoffeeMaker {
         this.money = money;
         this.state = State.INIT;
         printMainMenu();
-        //    System.out.println("MACHINE CREATED");
     }
 
     // method to interact with the coffeeMaker
@@ -170,140 +166,3 @@ class CoffeeMaker {
 enum State {
     INIT, BUY, ADDWATER, ADDMILK, ADDBEANS, ADDCUPS, TAKE, REMAINING;
 }
-
-
-
-/*
-
-        **** SOLUTION FOR #5 BELOW *****
-package machine;
-
-import java.util.HashMap;
-import java.util.Scanner;
-
-public class CoffeeMachine {
-    public static void main(String[] args) {
-        boolean exit = false;
-        Scanner scanner = new Scanner(System.in);
-        HashMap<String, Integer> supplies = new HashMap<>();
-        supplies.put("water", 400);
-        supplies.put("milk", 540);
-        supplies.put("beans", 120);
-        supplies.put("cups", 9);
-        supplies.put("money", 550);
-
-        while (true) {
-
-            System.out.println("Write action (buy, fill, take, remaining, exit):");
-            String input = scanner.nextLine();
-
-            switch (input) {
-                case "buy":
-                    buy(scanner, supplies);
-                    break;
-                case "fill":
-                    fill(scanner, supplies);
-                    break;
-                case "take":
-                    take(scanner, supplies);
-                    break;
-                case "remaining":
-                    printSupplies(supplies);
-                    break;
-                case "exit":
-                    exit = true;
-                    break;
-            }
-
-
-            if (exit) { // end program
-                break;
-            }
-
-        } // end of main while loop
-
-    }
-
-    private static void take(Scanner scanner, HashMap<String, Integer> supplies) {
-        System.out.println("I gave you $" + supplies.get("money"));
-        supplies.put("money", 0);
-    }
-
-    private static void fill(Scanner scanner, HashMap<String, Integer> supplies) {
-        System.out.println("Write how many ml of water do you want to add:");
-        supplies.put("water", supplies.get("water") + scanner.nextInt());
-
-        System.out.println("Write how many ml of milk do you want to add:");
-        supplies.put("milk", supplies.get("milk") + scanner.nextInt());
-
-        System.out.println("Write how many grams of coffee beans do you want to add:");
-        supplies.put("beans", supplies.get("beans") + scanner.nextInt());
-
-        System.out.println("Write how many disposable cups of coffee do you want to add:");
-        supplies.put("cups", supplies.get("cups") + scanner.nextInt());
-    }
-
-    private static void buy(Scanner scanner, HashMap<String, Integer> supplies) {
-        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: ");
-        String input = scanner.nextLine();
-
-        // water, milk, beans, money
-        switch (input) {
-            case "1": // espresso
-                buyDrink(supplies, 250, 0, 16, 4);
-                break;
-            case "2": // latte
-                buyDrink(supplies, 350, 75, 20, 7);
-                break;
-            case "3": // cappuccino
-                buyDrink(supplies, 200, 100, 12, 6);
-                break;
-            case "back" :
-                break;
-        }
-
-
-
-    }
-
-    private static void buyDrink(HashMap<String, Integer> supplies, int water, int milk, int beans, int money) {
-
-        boolean enoughWater = water <= supplies.get("water");
-        boolean enoughMilk = milk <= supplies.get("milk");
-        boolean enoughBeans = beans <= supplies.get("beans");
-        boolean enoughCups = supplies.get("cups") > 0;
-
-        if (enoughWater && enoughMilk && enoughBeans && enoughCups) {
-            System.out.println("I have enough resources, making you a coffee!");
-            supplies.put("water", supplies.get("water") - water);
-            supplies.put("milk", supplies.get("milk") - milk);
-            supplies.put("beans", supplies.get("beans") - beans);
-            supplies.put("money", supplies.get("money") + money);
-            supplies.put("cups", supplies.get("cups") - 1);
-        } else {
-            System.out.print("Sorry, not enough ");
-            if (!enoughWater) {
-                System.out.println("water!");
-            } else if (!enoughMilk) {
-                System.out.println("milk!");
-            } else if (!enoughBeans) {
-                System.out.println("beans!");
-            } else {
-                System.out.println("cups!");
-            }
-        }
-
-
-    }
-
-    public static void printSupplies(HashMap<String, Integer> supplies) {
-        System.out.println("The coffee machine has:");
-        System.out.println(supplies.get("water") + " of water");
-        System.out.println(supplies.get("milk") + " of milk");
-        System.out.println(supplies.get("beans") + " of coffee beans");
-        System.out.println(supplies.get("cups") + " of disposable cups");
-        System.out.println(supplies.get("money") + " of money");
-    }
-
-}
-*/
